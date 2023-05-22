@@ -81,11 +81,11 @@ public class ClinicService {
     }
 
     public void updateClinic(String email, ClinicRequest request) {
-       Clinic clinic = userRepository.findByEmail(email).get().getOwnedClinic();
+       Clinic clinic = getMyClinic(email);
        clinic.setAddress(request.getAddress());
        clinic.setPhoneNumber(request.getPhoneNumber());
+       clinicRepository.save(clinic);
     }
-
 
     public Clinic getMyClinic(String email) {
         return userService.getMyClinic(email);

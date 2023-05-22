@@ -66,6 +66,9 @@ public class ClinicController {
     @PatchMapping("/myClinic")
     public void updateClinicData(@RequestBody ClinicRequest clinicRequest, Authentication authentication) {
         User user = (User) authentication.getPrincipal();
+        System.out.println("AAAAAAAAAAAAAAAAAAAA");
+        System.out.println("AAAAAAAAAAAAAAAAAAAA" + clinicRequest);
+        System.out.println("AAAAAAAAAAAAAAAAAAAA" + user.getEmail());
         clinicService.updateClinic(user.getEmail(), clinicRequest);
     }
     @GetMapping("/patients")
