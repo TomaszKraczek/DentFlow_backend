@@ -74,7 +74,11 @@ public class ToothService {
                 .findFirst().orElseThrow(() -> new ResponseStatusException(HttpStatus.EXPECTATION_FAILED, "Patient not found: "));
         Tooth tooth =  patient.getTeeth().stream().filter(t -> t.getNumber() ==toothRequest.getTooth().getNumber())
                 .findFirst().orElseThrow(() -> new ResponseStatusException(HttpStatus.EXPECTATION_FAILED, "tooth not found: "));
-        Description description = Description.builder().description(toothRequest.getTooth().getDescription()).build();
+        Description description = Description.builder()
+                .description(toothRequest.getTooth().getDescription())
+                .dateTime(toothRequest.getCurrentDateTime())
+                .doctorName(toothRequest.getDoctorName())
+                .build();
         descriptionRepository.save(description);
         tooth.addDescription(description);
         toothRepository.save(tooth);

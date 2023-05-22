@@ -9,6 +9,8 @@ import lombok.*;
 public class ToothRequest {
     private Long clinicId;
     private Long patientId;
+    private String currentDateTime;
+    private String doctorName;
     private ToothRequestModel tooth;
 
 

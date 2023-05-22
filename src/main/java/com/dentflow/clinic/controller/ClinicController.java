@@ -82,7 +82,7 @@ public class ClinicController {
     }
 
     @GetMapping("/myDoctors")
-    public Set<User> getDoctorsfromMyClinic(Authentication authentication, ClinicRequest clinicRequest){
+    public Set<User> getDoctorsFromMyClinic(Authentication authentication, ClinicRequest clinicRequest){
         User user = (User) authentication.getPrincipal();
         Long clinicId = clinicRequest.getClinicId();
 
@@ -93,7 +93,7 @@ public class ClinicController {
         return clinicService.getDoctorsfromMyClinic(user.getEmail(), clinicId);
     }
     @GetMapping("/doctors")
-    public Set<DoctorResponse> getDoctorsfromClinic(ClinicRequest clinicRequest){
+    public Set<DoctorResponse> getDoctorsFromClinic(ClinicRequest clinicRequest){
         Long clinicId = clinicRequest.getClinicId();
 
         if(!clinicService.checkIfClinicExists(clinicId)){
@@ -103,7 +103,7 @@ public class ClinicController {
         return clinicService.getDoctorsByClinicId( clinicId);
     }
     @GetMapping("/visits")
-    public Set<VisitResponse> getVisitsfromClinic(ClinicRequest clinicRequest){
+    public Set<VisitResponse> getVisitsFromClinic(ClinicRequest clinicRequest){
         Long clinicId = clinicRequest.getClinicId();
 
         if(!clinicService.checkIfClinicExists(clinicId)){

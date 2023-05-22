@@ -40,6 +40,7 @@ public class ToothController {
     @PatchMapping("/description")
     public void updateDescription(@RequestBody ToothRequest toothRequest, Authentication authentication){
         User user = (User) authentication.getPrincipal();
+        System.out.println(toothRequest);
         toothService.updateDescription(toothRequest,user.getEmail());
     }
 

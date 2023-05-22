@@ -18,4 +18,6 @@ public class Description {
     private Long id;
 
     private String description;
+    private String dateTime;
+    private String doctorName;
 }
