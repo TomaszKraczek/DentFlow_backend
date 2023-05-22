@@ -28,6 +28,11 @@ public class VisitController {
 
         return visitService.getVisitsByClinicId(user.getEmail(),clinicRequest.getClinicId());
     }
+    @DeleteMapping
+    public void deleteVisit(VisitRequest visitRequest, Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+        visitService.deleteVisit(visitRequest, user.getEmail());
+    }
     @GetMapping("/doctor")
     public Set<Visit> getDocotrVisitsByClinicId(ClinicRequest clinicRequest, Authentication authentication) {
         User user = (User) authentication.getPrincipal();

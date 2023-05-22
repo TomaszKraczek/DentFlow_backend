@@ -3,6 +3,7 @@ package com.dentflow.user.model;
 import com.dentflow.clinic.model.Clinic;
 import com.dentflow.hoursOfAvailability.model.HoursOfAvailability;
 import com.dentflow.patient.model.Patient;
+import com.dentflow.visit.model.Visit;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -97,6 +98,5 @@ public class User implements UserDetails {
     public void addMyPatientsAccount(Patient myPatientAccount) {
         this.myPatientsAccounts.add(myPatientAccount);
     }
-
 
 }

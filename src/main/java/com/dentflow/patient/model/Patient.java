@@ -60,4 +60,8 @@ public class Patient {
     public void addVisit(Visit visit) {
         visits.add(visit);
     }
+
+    public void deleteVisit(Visit visit) {
+        visits.remove(visit);
+    }
 }

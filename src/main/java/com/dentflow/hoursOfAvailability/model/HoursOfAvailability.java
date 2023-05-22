@@ -26,7 +26,6 @@ public class HoursOfAvailability {
     @JoinColumn(name = "clinic_id")
     @JsonIgnore
     private Clinic clinic;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonIgnore

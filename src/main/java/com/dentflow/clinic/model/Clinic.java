@@ -67,4 +67,8 @@ public class Clinic {
     public void addPatient(Patient patient) {
         patients.add(patient);
     }
+
+    public void deleteVisit(Visit visit) {
+        visits.remove(visit);
+    }
 }

@@ -130,4 +130,15 @@ public class VisitService {
         userRepository.save(user);
         clinicRepository.save(clinic);
     }
+
+    public void deleteVisit(VisitRequest visitRequest, String email) {
+        Clinic clinic = userService.getUser(email).getClinics().stream().filter(clinic1 -> Objects.equals(clinic1.getId(), visitRequest.getClinicId())).findFirst().orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Clinic not found: "));
+        Visit visit = clinic.getVisits().stream().filter(visit1 -> Objects.equals(visit1.getId(), visitRequest.getVisitId())).findFirst().orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Visit not found: "));
+        Patient patient =visit.getPatient();
+        clinic.deleteVisit(visit);
+        clinicRepository.save(clinic);
+        patient.deleteVisit(visit);
+        patientRepository.save(patient);
+        visitRepository.delete(visit);
+    }
 }
