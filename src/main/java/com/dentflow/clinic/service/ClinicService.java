@@ -80,6 +80,12 @@ public class ClinicService {
         return user.getClinics().stream().filter(c -> c.getId() == clinicId).findFirst().orElse(user.getOwnedClinic()).getPatients();
     }
 
+    public void updateClinic(String email, ClinicRequest request) {
+       Clinic clinic = userRepository.findByEmail(email).get().getOwnedClinic();
+       clinic.setAddress(request.getAddress());
+       clinic.setPhoneNumber(request.getPhoneNumber());
+    }
+
 
     public Clinic getMyClinic(String email) {
         return userService.getMyClinic(email);

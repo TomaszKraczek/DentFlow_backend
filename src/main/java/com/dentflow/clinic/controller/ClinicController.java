@@ -63,7 +63,11 @@ public class ClinicController {
         User user = (User) authentication.getPrincipal();
         clinicService.deleteEmployee(user.getEmail(), userRequest);
     }
-
+    @PatchMapping("/myClinic")
+    public void updateClinicData(@RequestBody ClinicRequest clinicRequest, Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+        clinicService.updateClinic(user.getEmail(), clinicRequest);
+    }
     @GetMapping("/patients")
     public Set<Patient> getPatients(Authentication authentication, ClinicRequest clinicRequest){
         User user = (User) authentication.getPrincipal();
