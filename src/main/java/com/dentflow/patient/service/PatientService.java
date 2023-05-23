@@ -39,7 +39,18 @@ public class PatientService {
         Clinic clinic = userService.getUser(email).getClinics().stream().filter(c -> c.getId() == request.getClinicId())
                         .findFirst().orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Clinic not found"));
         patientRepository.save(patient);
-        for(int i = 1; i <= 32; i++){
+        for (int i = 11;  i <= 49; i++) {
+            if (i == 19) {
+                i = 21;
+            } else if (i == 29) {
+                i = 41;
+            } else if (i == 49) {
+                i = 31;
+            }
+            if (i == 39) {
+                break;
+            }
+
             patient.addTooth(toothRepository.save(Tooth.builder().number(i).forObservation(false).caries(false).secondaryCaries(false).filling(false).prostheticCrown(false).channelsFilledCorrectly(false).channelNotCompleted(false).periapicalChange(false).crownRootInsert(false).supragingivalCalculus(false).subgingivalCalculus(false).impactedTooth(false).noTooth(false).microdonticTooth(false).developmentalDefect(false).pathologicalClash(false)
                     .patient(patient).build()));
         }
