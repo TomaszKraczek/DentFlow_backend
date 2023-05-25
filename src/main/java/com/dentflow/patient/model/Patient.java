@@ -47,6 +47,8 @@ public class Patient {
     private String phoneNumber;
     @Column(unique = true)
     private String pesel;
+    @Column(columnDefinition = "TEXT")
+    private String patientDescription;
     private LocalDate birthDate;
     @JsonIgnore
     @OneToMany

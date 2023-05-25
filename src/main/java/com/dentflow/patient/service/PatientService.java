@@ -3,6 +3,7 @@ package com.dentflow.patient.service;
 import com.dentflow.clinic.model.Clinic;
 import com.dentflow.clinic.model.ClinicRepository;
 import com.dentflow.clinic.service.ClinicService;
+import com.dentflow.exception.ApiRequestException;
 import com.dentflow.patient.model.Patient;
 import com.dentflow.patient.model.PatientRepository;
 import com.dentflow.patient.model.PatientRequest;
@@ -72,6 +73,14 @@ public class PatientService {
     }
     public boolean checkIfPatientExist(Long patientId) {
         return patientRepository.existsById(patientId);
+    }
+
+    public void updatePatientDescription(Long clinicId, Long patientId, String patientDescription, String doctorEmail) {
+        Clinic clinic = userService.getUser(doctorEmail).getClinics().stream()
+                .filter(c -> Objects.equals(c.getId(), clinicId)).findFirst().orElseThrow(() -> new ApiRequestException("Clinic not found"));
+        Patient patient = clinic.getPatientById(patientId);
+        patient.setPatientDescription(patientDescription);
+        patientRepository.save(patient);
     }
 
     public void updatePatient(PatientRequest request, String email) {

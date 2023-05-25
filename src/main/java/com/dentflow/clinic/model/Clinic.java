@@ -1,11 +1,13 @@
 package com.dentflow.clinic.model;
 
+import com.dentflow.exception.ApiRequestException;
 import com.dentflow.patient.model.Patient;
 import com.dentflow.user.model.User;
 import com.dentflow.visit.model.Visit;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashSet;
 import java.util.List;
@@ -71,5 +73,9 @@ public class Clinic {
 
     public void deleteVisit(Visit visit) {
         visits.remove(visit);
+    }
+
+    public Patient getPatientById(Long patientId) {
+        return patients.stream().filter(patient -> patient.getPatientId() == patientId).findFirst().orElseThrow(() -> new ApiRequestException("Patient not found"));
     }
 }

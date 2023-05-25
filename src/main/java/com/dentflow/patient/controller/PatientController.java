@@ -2,6 +2,7 @@ package com.dentflow.patient.controller;
 
 import com.dentflow.exception.ApiRequestException;
 import com.dentflow.patient.model.Patient;
+import com.dentflow.patient.model.PatientDescriptionRequest;
 import com.dentflow.patient.model.PatientRequest;
 import com.dentflow.patient.service.PatientService;
 import com.dentflow.user.model.User;
@@ -46,5 +47,15 @@ public class PatientController {
         }
 
         return patientService.getPatientVisitHistory(clinicId, patientId, user.getEmail());
+    }
+    @PutMapping("/change-description")
+    public void setPatientDescription(@RequestBody PatientDescriptionRequest request, Authentication authentication){
+        User user = (User) authentication.getPrincipal();
+
+        if(!patientService.checkIfPatientExist(request.getPatientId())){
+            throw new ApiRequestException("Cannot find patient with that id: " + request.getPatientId());
+        }
+
+        patientService.updatePatientDescription(request.getClinicId(), request.getPatientId(), request.getPatientDescription(), user.getEmail());
     }
 }
