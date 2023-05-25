@@ -34,6 +34,7 @@ public class User implements UserDetails {
     private String email;
     @JsonIgnore
     private String password;
+    private String phoneNumber;
     private String pesel;
     private LocalDate birthDate;
     private Set<Role> roles ;

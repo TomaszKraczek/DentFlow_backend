@@ -18,6 +18,7 @@ public class ClinicRequest {
     private String ownerName;
     private String ownerLastname;
     private String phoneNumber;
+    private int numberOfSeats;
     @Email
     private String email;
     private String city;
@@ -28,6 +29,7 @@ public class ClinicRequest {
         return Clinic.builder()
                 .name(request.getClinicName())
                 .owner(user)
+                .numberOfSeats(request.getNumberOfSeats())
                 .city(request.getCity())
                 .address(request.getAddress())
                 .phoneNumber(request.getPhoneNumber())

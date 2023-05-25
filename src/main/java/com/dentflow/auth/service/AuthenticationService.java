@@ -35,6 +35,9 @@ public class AuthenticationService {
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .email(request.getEmail())
+                .pesel(request.getPesel())
+                .birthDate(convertStringtoData(request.getBirthDate()))
+                .phoneNumber(request.getPhoneNumber())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .roles(Collections.singleton(Role.USER))
                 .build();

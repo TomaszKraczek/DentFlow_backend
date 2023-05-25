@@ -23,6 +23,7 @@ public class Clinic {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private int numberOfSeats;
     private String name;
     private String city;
     private String address;
