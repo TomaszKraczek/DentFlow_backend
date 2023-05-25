@@ -45,6 +45,7 @@ public class Patient {
     @Column(unique = true)
     private String email;
     private String phoneNumber;
+    @Column(unique = true)
     private String pesel;
     private LocalDate birthDate;
     @JsonIgnore

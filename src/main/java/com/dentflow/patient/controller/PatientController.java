@@ -30,6 +30,11 @@ public class PatientController {
         User user = (User) authentication.getPrincipal();
         patientService.registerPatient(request, user.getEmail());
     }
+    @PatchMapping
+    public void updatePatient(@RequestBody PatientRequest request, Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+        patientService.updatePatient(request, user.getEmail());
+    }
 
     @GetMapping
     public Set<Visit> getVisitHistory(@RequestParam Long patientId, @RequestParam Long clinicId ,Authentication authentication){

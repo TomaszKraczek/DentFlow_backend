@@ -36,7 +36,7 @@ public class PatientRequest {
                 .teeth(new HashSet<>())
                 .build();
     }
-    private static LocalDate convertStringtoData(String visitDate) {
+    public static LocalDate convertStringtoData(String visitDate) {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return LocalDate.parse(visitDate, dateFormatter);
     }

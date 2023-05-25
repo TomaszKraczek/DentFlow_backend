@@ -36,7 +36,7 @@ public class PatientService {
 
     public void registerPatient(PatientRequest request, String email) {
         Patient patient = PatientRequest.toEntity(request);
-        Clinic clinic = userService.getUser(email).getClinics().stream().filter(c -> c.getId() == request.getClinicId())
+        Clinic clinic = userService.getUser(email).getClinics().stream().filter(c -> Objects.equals(c.getId(), request.getClinicId()))
                         .findFirst().orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Clinic not found"));
         patientRepository.save(patient);
         for (int i = 11;  i <= 49; i++) {
@@ -72,5 +72,18 @@ public class PatientService {
     }
     public boolean checkIfPatientExist(Long patientId) {
         return patientRepository.existsById(patientId);
+    }
+
+    public void updatePatient(PatientRequest request, String email) {
+        Clinic clinic = userService.getUser(email).getClinics().stream().filter(c -> Objects.equals(c.getId(), request.getClinicId()))
+                .findFirst().orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Clinic not found"));
+        Patient patient = clinic.getPatients().stream().filter(patient1 -> patient1.getPatientId() == request.getPatientId()).findFirst().orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Patient not found"));
+        patient.setFirstName(request.getFirstName());
+        patient.setLastName(request.getLastName());
+        patient.setPesel(request.getPesel());
+        patient.setBirthDate(PatientRequest.convertStringtoData(request.getBirthDate()));
+        patient.setPhoneNumber(request.getPhoneNumber());
+        patient.setEmail(request.getEmail());
+        patientRepository.save(patient);
     }
 }
