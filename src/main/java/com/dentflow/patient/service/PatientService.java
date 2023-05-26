@@ -66,7 +66,6 @@ public class PatientService {
     }
 
     public Set<Visit> getPatientVisitHistory(Long clinicId, Long patientId, String email){
-//        Patient patient = PatientRequest.toEntity(request);
         Clinic clinic = userService.getUser(email).getClinics().stream()
                 .filter(c -> Objects.equals(c.getId(), clinicId)).findFirst().orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Clinic not found"));
         return clinic.getPatients().stream().filter(p -> p.getPatientId() == patientId).findFirst().get().getVisits();

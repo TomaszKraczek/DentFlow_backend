@@ -45,7 +45,6 @@ public class ClinicController {
         User user  = (User) authentication.getPrincipal();
         return clinicService.getMyClinic(user.getEmail());
     }
-
     @GetMapping("/personnel")
     public Set<User> getPersonnel(Authentication authentication) {
         User user = (User) authentication.getPrincipal();
