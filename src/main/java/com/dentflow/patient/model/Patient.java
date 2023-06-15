@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Null;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -42,7 +43,6 @@ public class Patient {
     private String lastName;
 
     @Email
-    @Column(unique = true)
     private String email;
     private String phoneNumber;
     @Column(unique = true)
