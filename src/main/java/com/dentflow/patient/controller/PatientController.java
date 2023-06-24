@@ -55,7 +55,6 @@ public class PatientController {
         if(!patientService.checkIfPatientExist(request.getPatientId())){
             throw new ApiRequestException("Cannot find patient with that id: " + request.getPatientId());
         }
-
         patientService.updatePatientDescription(request.getClinicId(), request.getPatientId(), request.getPatientDescription(), user.getEmail());
     }
 }
